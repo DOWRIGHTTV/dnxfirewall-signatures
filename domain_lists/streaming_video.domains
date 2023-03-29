@@ -1,0 +1,32 @@
+# ================================
+# section: MULTI FUNCTION
+# ================================
+rumble.com stream_video
+youtube.com stream_video
+# ================================
+# section: GENERAL
+# ================================
+d.tube stream_video
+dailymotion.com stream_video
+metacafe.com stream_video
+swarmify.com stream_video
+vevo.com stream_video
+vimeo.com stream_video
+# ================================
+# section: NFC
+# ================================
+acorn.tv stream_video
+crunchyroll.com stream_video
+disneyplus.com stream_video
+hbomax.com stream_video
+hulu.com stream_video
+netflix.com stream_video
+peacocktv.com stream_video
+plex.tv stream_video
+pluto.tv stream_video
+tubitv.com stream_video
+vudu.com stream_video
+# ================================
+# section: LIVE STREAMING
+# ================================
+twitch.tv stream_video
