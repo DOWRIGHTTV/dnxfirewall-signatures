@@ -18,9 +18,12 @@ LIST_FOLDERS = ('domain_lists', 'geo_lists', 'ip_lists')
 pp = pprint.PrettyPrinter(indent=4, width=120).pprint
 
 
+# hashing in a way that is compatible with linux file systems
 def get_hash(file_path: str) -> str:
     with open(file_path, 'rb') as file:
-        file_hash = hashlib.sha256(file.read()).hexdigest()
+        file = b'\n'.join(file.read().splitlines())
+
+        file_hash = hashlib.sha256(file).hexdigest()
 
     return file_hash
 
