@@ -21,8 +21,9 @@ pp = pprint.PrettyPrinter(indent=4, width=120).pprint
 # hashing in a way that is compatible with linux file systems
 # todo: comments are causing hashing issues. tshoot and resolve.
 def get_hash(file_path: str) -> str:
+    # hashing file with all comments removed
     with open(file_path, 'rb') as file:
-        file = b'\n'.join(file.read().splitlines())
+        file = b'\n'.join([line for line in file.read().splitlines() if not line.startswith(b'#')])
 
         file_hash = hashlib.sha256(file).hexdigest()
 
