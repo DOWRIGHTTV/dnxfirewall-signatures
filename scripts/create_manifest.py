@@ -9,6 +9,8 @@ import hashlib
 
 WRITE_MANIFEST = True
 # WRITE_MANIFEST = False
+WRITE_VALIDATION = True
+# WRITE_VALIDATION = False
 
 PATH_SEPARATOR = '\\' if sys.platform == 'win32' else '/'
 HOME_DIR: str = '/'.join(os.path.realpath(__file__).split(PATH_SEPARATOR)[:-2])
@@ -24,6 +26,8 @@ def get_hash(file_path: str) -> str:
     # hashing file with all comments removed
     with open(file_path, 'rb') as file:
         file = b'\n'.join([line for line in file.read().splitlines() if not line.startswith(b'#')])
+
+        file += b'\n'
 
         file_hash = hashlib.sha256(file).hexdigest()
 
@@ -52,10 +56,29 @@ def write_manifest(manifest: list[str]) -> None:
 
         manifest_file.write('\n')
 
+def build_validation() -> list[str]:
+    file_validation = [
+        f'COMPATIBLE_VERSION {get_hash(f"{HOME_DIR}/COMPATIBLE_VERSION")}',
+        f'SIGNATURE_MANIFEST {get_hash(f"{HOME_DIR}/SIGNATURE_MANIFEST")}'
+    ]
+
+    return file_validation
+
+def write_validation(file_validation: list[str]) -> None:
+    with open(f'{HOME_DIR}/FILE_VALIDATION', 'w') as validation_file:
+        validation_file.write('\n'.join(file_validation))
+
+        validation_file.write('\n')
+
 
 if (__name__ == '__main__'):
     manifest = build_manifest()
     if (WRITE_MANIFEST):
         write_manifest(manifest)
 
+    validation = build_validation()
+    if (WRITE_VALIDATION):
+        write_validation(validation)
+
     pp(manifest)
+    pp(validation)
