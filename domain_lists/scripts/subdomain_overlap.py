@@ -1,4 +1,5 @@
 from pprint import PrettyPrinter
+from ipaddress import IPv4Address
 
 ALL_FILES = False
 WRITE_TO_FILE = True
@@ -7,7 +8,7 @@ pp = PrettyPrinter().pprint
 
 # =========================
 # FILENAME TO FILTER
-FILE_TO_PARSE = 'dynamic_dns'
+FILE_TO_PARSE = 'drug'
 FILES_TO_PARSE = [
     'ads', 'crypto_miner', 'downloads', 'drugs', 'dynamic_dns', 'fraud', 'gambling', 'malicious', 'mature', 'p2p',
     'piracy', 'pornography', 'purchases', 'ransomware', 'remote_login', 'scam', 'social_media', 'stream_video',
@@ -25,6 +26,8 @@ def run_script():
 
     for file in FILES_TO_PARSE:
         loaded_signatures = load_signatures(file)
+
+        iter_filter_ip_addresses(loaded_signatures)
 
         iter_filter_www(loaded_signatures)
 
@@ -66,6 +69,21 @@ def load_signatures(file: str) -> dict[str, list[str]]:
                 current_section_append(sig.split()[0])
 
     return raw_signatures
+
+def filter_ip_addresses(signature_list: list[str]) -> None:
+    ''' inplace filter
+    '''
+    filtered_list = []
+
+    for signature in signature_list:
+
+        try:
+            IPv4Address(signature)
+        except:
+            filtered_list.append(signature)
+
+    signature_list.clear()
+    signature_list.extend(filtered_list)
 
 def write_signatures(file: str, processed_signatures: dict[str, list[str]]) -> None:
     OUTPUT_FILE = f'{FILEPATH}/{file}.new'
@@ -138,6 +156,21 @@ def combine_sub_domains(signature_list: list[str]) -> None:
 
     signature_list.clear()
     signature_list.extend(signatures)
+
+def iter_filter_ip_addresses(loaded_signatures: dict[str, list[str]]) -> None:
+    original_count = 0
+    filtered_count = 0
+
+    for section, signatures in loaded_signatures.items():
+        # pre-processing count
+        original_count += len(signatures)
+
+        filter_ip_addresses(signatures)
+
+        # post in place swap of filtered data
+        filtered_count += len(signatures)
+
+    print(f'{"ip filter ->".ljust(20)}orig: {original_count}, reduced: {filtered_count}')
 
 def iter_filter_www(loaded_signatures: dict[str, list[str]]) -> None:
     original_count = 0
