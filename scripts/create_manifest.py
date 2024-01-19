@@ -36,6 +36,7 @@ def get_hash(file_path: str) -> str:
 def build_manifest() -> list[str]:
     manifest = []
 
+    # signature files
     for folder in LIST_FOLDERS:
 
         with open(f'{HOME_DIR}/{folder}/SIGNATURE_LIST', 'r') as sig_file:
@@ -47,6 +48,11 @@ def build_manifest() -> list[str]:
             file_hash = get_hash(f'{HOME_DIR}/{file_path}')
 
             manifest.append(f'{file_path} {file_hash}')
+
+    # webui geolocation config file
+    webui_cfg_file_path = ''
+    webui_cfg_hash = get_hash(f'{HOME_DIR}/webui/geolocation.json')
+    manifest.append(f'webui/geolocation_config.json {get_hash(f"{HOME_DIR}/webui/geolocation_config.json")}')
 
     return manifest
 
