@@ -1,47 +1,23 @@
-# MANUALLY VALIDATED FROM AUTO GENERATED ccode_to_dnx_auto.csv
-# manually added
--,rfc1918,-
-hk,hong_kong,asia
-tw,taiwan,asia
-mo,macao,asia
-# manually translated
-bo,bolivia,south_america
-vg,uk_virgin_islands,north_america
-cc,cocos_islands,oceania
-cw,curacao,north_america
-kp,north_korea,asia
-cd,congo,africa
-fk,falkland_islands,south_america
+# MANUALLY VALIDATED FROM AUTO GENERATED ccode_to_dnx_auto_generated.csv
+#--------------------------------
+#UNRESOLVED DNXFIREWALL COUNTRIES -> 1
+#--------------------------------
+#-,rfc1918,-
+#--------------------------------
+#NO DNXFIREWALL MAPPING -> 9
+#--------------------------------
+#,antarctica,antarctica
+#,democratic_republic_of_the_congo,africa
 #,french_southern_territories,africa
-gw,guinea_bissau,africa
 #,heard_island_and_mcdonald_islands,oceania
-ir,iran,asia
-la,laos,asia
-fm,micronesia,oceania
-pn,pitcairn,oceania
-kr,south_korea,asia
-md,moldova,europe
-re,reunion,africa
-bl,saint_barthelemy,north_america
 #,saint_helena,africa
-mf,saint_martin_french,north_america
-#,sark,europe -> guernsey
-sx,saint_martin_dutch,north_america
+#,sark,europe
 #,south_georgia_and_the_south_sandwich_islands,south_america
-ps,palestine,asia
 #,svalbard_and_jan_mayen_islands,europe
-sy,syria,asia
-tl,timor_leste,asia
-gb,united_kingdom,europe
-tz,tanzania,africa
-um,us_minor_outlying_islands,oceania
-us,united_states,north_america
-vi,us_virgin_islands,north_america
-ve,venezuela,south_america
-vn,vietnam,asia
-wf,wallis_and_futuna,oceania
 #,western_sahara,africa
-# auto generated
+#--------------------------------
+#AUTO GENERATED MAPPING -> 241
+#--------------------------------
 ad,andorra,europe
 ae,united_arab_emirates,asia
 af,afghanistan,asia
@@ -66,8 +42,10 @@ bg,bulgaria,europe
 bh,bahrain,asia
 bi,burundi,africa
 bj,benin,africa
+bl,saint_barthelemy,north_america
 bm,bermuda,north_america
 bn,brunei_darussalam,asia
+bo,bolivia,south_america
 bq,bonaire,north_america
 br,brazil,south_america
 bs,bahamas,north_america
@@ -77,6 +55,7 @@ bw,botswana,africa
 by,belarus,europe
 bz,belize,north_america
 ca,canada,north_america
+cc,cocos_islands,oceania
 cf,central_african_republic,africa
 cg,congo,africa
 ch,switzerland,europe
@@ -89,6 +68,7 @@ co,colombia,south_america
 cr,costa_rica,north_america
 cu,cuba,north_america
 cv,cabo_verde,africa
+cw,curacao,north_america
 cx,christmas_island,oceania
 cy,cyprus,asia
 cz,czechia,europe
@@ -106,9 +86,12 @@ es,spain,europe
 et,ethiopia,africa
 fi,finland,europe
 fj,fiji,oceania
+fk,falkland_islands,south_america
+fm,micronesia,oceania
 fo,faroe_islands,europe
 fr,france,europe
 ga,gabon,africa
+gb,united_kingdom,europe
 gd,grenada,north_america
 ge,georgia,asia
 gf,french_guiana,south_america
@@ -123,7 +106,9 @@ gq,equatorial_guinea,africa
 gr,greece,europe
 gt,guatemala,north_america
 gu,guam,oceania
+gw,guinea_bissau,africa
 gy,guyana,south_america
+hk,hong_kong,asia
 hn,honduras,north_america
 hr,croatia,europe
 ht,haiti,north_america
@@ -135,6 +120,7 @@ im,isle_of_man,europe
 in,india,asia
 io,british_indian_ocean_territory,africa
 iq,iraq,asia
+ir,iran,asia
 is,iceland,europe
 it,italy,europe
 je,jersey,europe
@@ -147,9 +133,12 @@ kh,cambodia,asia
 ki,kiribati,oceania
 km,comoros,africa
 kn,saint_kitts_and_nevis,north_america
+kp,north_korea,asia
+kr,south_korea,asia
 kw,kuwait,asia
 ky,cayman_islands,north_america
 kz,kazakhstan,asia
+la,laos,asia
 lb,lebanon,asia
 lc,saint_lucia,north_america
 li,liechtenstein,europe
@@ -162,13 +151,16 @@ lv,latvia,europe
 ly,libya,africa
 ma,morocco,africa
 mc,monaco,europe
+md,moldova,europe
 me,montenegro,europe
+mf,saint_martin_french,north_america
 mg,madagascar,africa
 mh,marshall_islands,oceania
 mk,north_macedonia,europe
 ml,mali,africa
 mm,myanmar,asia
 mn,mongolia,asia
+mo,macao,asia
 mp,northern_mariana_islands,oceania
 mq,martinique,north_america
 mr,mauritania,africa
@@ -201,11 +193,14 @@ ph,philippines,asia
 pk,pakistan,asia
 pl,poland,europe
 pm,saint_pierre_and_miquelon,north_america
+pn,pitcairn,oceania
 pr,puerto_rico,north_america
+ps,palestine,asia
 pt,portugal,europe
 pw,palau,oceania
 py,paraguay,south_america
 qa,qatar,asia
+re,reunion,africa
 ro,romania,europe
 rs,serbia,europe
 ru,russian_federation,europe
@@ -226,6 +221,8 @@ sr,suriname,south_america
 ss,south_sudan,africa
 st,sao_tome_and_principe,africa
 sv,el_salvador,north_america
+sx,saint_martin_dutch,north_america
+sy,syria,asia
 sz,eswatini,africa
 tc,turks_and_caicos_islands,north_america
 td,chad,africa
@@ -233,19 +230,29 @@ tg,togo,africa
 th,thailand,asia
 tj,tajikistan,asia
 tk,tokelau,oceania
+tl,timor_leste,asia
 tm,turkmenistan,asia
 tn,tunisia,africa
 to,tonga,oceania
 tr,turkey,asia
 tt,trinidad_and_tobago,north_america
 tv,tuvalu,oceania
+tw,taiwan,asia
+tz,tanzania,africa
 ua,ukraine,europe
 ug,uganda,africa
+um,us_minor_outlying_islands,oceania
+us,united_states,north_america
 uy,uruguay,south_america
 uz,uzbekistan,asia
 va,holy_see,europe
 vc,saint_vincent_and_the_grenadines,north_america
+ve,venezuela,south_america
+vg,uk_virgin_islands,north_america
+vi,us_virgin_islands,north_america
+vn,vietnam,asia
 vu,vanuatu,oceania
+wf,wallis_and_futuna,oceania
 ws,samoa,oceania
 ye,yemen,asia
 yt,mayotte,africa

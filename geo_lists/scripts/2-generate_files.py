@@ -50,14 +50,16 @@ def format_ip_and_names():
         f.write('\n'.join(modified_lines) + '\n')
 
 # loads ccode_to_dnx_final.csv and generates json config file for dnx webui
-def generate_webui_cfg_file():
+def generate_geolocation_cfg():
     continents = {
-        'africa': {'enabled': 1, 'countries': []},
-        'asia': {'enabled': 1, 'countries': []},
-        'europe': {'enabled': 1, 'countries': []},
-        'north_america': {'enabled': 1, 'countries': []},
-        'oceania': {'enabled': 1, 'countries': []},
-        'south_america': {'enabled': 1, 'countries': []}
+        'geolocation': {
+            'africa': {'enabled': 1, 'countries': {}},
+            'asia': {'enabled': 1, 'countries': {}},
+            'europe': {'enabled': 1, 'countries': {}},
+            'north_america': {'enabled': 1, 'countries': {}},
+            'oceania': {'enabled': 1, 'countries': {}},
+            'south_america': {'enabled': 1, 'countries': {}}
+        }
     }
 
     countries_added = 0
@@ -67,8 +69,8 @@ def generate_webui_cfg_file():
                 continue
 
             ccode, cty, continent = line.strip().split(',')
-            if continent in continents:
-                continents[continent]['countries'].append(cty)
+            if continent in continents['geolocation']:  # this shouldn't be necessary since the data is pre-filtered
+                continents['geolocation'][continent]['countries'][cty] = 0  # system default is disabled
 
                 countries_added += 1
 
@@ -77,13 +79,14 @@ def generate_webui_cfg_file():
 
     print(f'countries added-> {countries_added}')
 
-    for data in continents.values():
-        data['countries'].sort()
+    # iterating over continents and replacing countries dict with a sorted version
+    for continent_data in continents['geolocation'].values():
+        continent_data['countries'] = dict(sorted(continent_data['countries'].items()))
 
-    with open(f'{HOME_DIR}/webui/geolocation.cfg', 'w') as f:
+    with open(f'{GEO_DIR}/geolocation.cfg', 'w') as f:
         json.dump(continents, f, indent=4)
 
 
 if (__name__ == '__main__'):
     # format_ip_and_names()
-    generate_webui_cfg_file()
+    generate_geolocation_cfg()
