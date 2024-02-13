@@ -104,6 +104,6 @@ venv.bak/
 .mypy_cache/
 
 # pycharm
-*.idea
-*.iml
-*.xml
+.idea
+.iml
+.xml
