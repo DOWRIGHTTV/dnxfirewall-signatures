@@ -2,9 +2,9 @@ import json
 import os
 import sys
 
-# loads new collection data in new_collection.csv and formats it for use with dnxfirewall.
-# todo: add raw country mapping output to this script so mapping.py can convert it to dnx format.
+from geolocation_enum_list import GEOLOCATION_ENUM_LIST
 
+# loads data from new_collection.csv and formats it for use with dnxfirewall.
 
 PATH_SEPARATOR = '\\' if sys.platform == 'win32' else '/'
 HOME_DIR: str = '/'.join(os.path.realpath(__file__).split(PATH_SEPARATOR)[:-3])
@@ -51,7 +51,7 @@ def format_ip_and_names():
 
 # loads ccode_to_dnx_final.csv and generates json config file for dnx webui
 def generate_geolocation_cfg():
-    continents = {
+    config = {
         'geolocation': {
             'africa': {'enabled': 1, 'countries': {}},
             'asia': {'enabled': 1, 'countries': {}},
@@ -59,7 +59,8 @@ def generate_geolocation_cfg():
             'north_america': {'enabled': 1, 'countries': {}},
             'oceania': {'enabled': 1, 'countries': {}},
             'south_america': {'enabled': 1, 'countries': {}}
-        }
+        },
+        'enum_list': GEOLOCATION_ENUM_LIST
     }
 
     countries_added = 0
@@ -69,8 +70,8 @@ def generate_geolocation_cfg():
                 continue
 
             ccode, cty, continent = line.strip().split(',')
-            if continent in continents['geolocation']:  # this shouldn't be necessary since the data is pre-filtered
-                continents['geolocation'][continent]['countries'][cty] = 0  # system default is disabled
+            if continent in config['geolocation']:  # this shouldn't be necessary since the data is pre-filtered
+                config['geolocation'][continent]['countries'][cty] = 0  # system default is disabled
 
                 countries_added += 1
 
@@ -80,11 +81,11 @@ def generate_geolocation_cfg():
     print(f'countries added-> {countries_added}')
 
     # iterating over continents and replacing countries dict with a sorted version
-    for continent_data in continents['geolocation'].values():
+    for continent_data in config['geolocation'].values():
         continent_data['countries'] = dict(sorted(continent_data['countries'].items()))
 
     with open(f'{GEO_DIR}/geolocation.cfg', 'w') as f:
-        json.dump(continents, f, indent=4)
+        json.dump(config, f, indent=4)
 
 
 if (__name__ == '__main__'):
