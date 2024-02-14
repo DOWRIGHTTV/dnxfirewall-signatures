@@ -8,8 +8,8 @@ import sys
 import hashlib
 
 WRITE_MANIFEST = True
-# WRITE_MANIFEST = False
 WRITE_VALIDATION = True
+# WRITE_MANIFEST = False
 # WRITE_VALIDATION = False
 
 PATH_SEPARATOR = '\\' if sys.platform == 'win32' else '/'
@@ -50,9 +50,9 @@ def build_manifest() -> list[str]:
             manifest.append(f'{file_path} {file_hash}')
 
     # webui geolocation config file
-    webui_cfg_file_path = ''
-    webui_cfg_hash = get_hash(f'{HOME_DIR}/webui/geolocation.json')
-    manifest.append(f'webui/geolocation_config.json {get_hash(f"{HOME_DIR}/webui/geolocation_config.json")}')
+    # webui_cfg_file_path = 'webui/geolocation_config.json'
+    # webui_cfg_hash = get_hash(f'{HOME_DIR}/webui/geolocation.cfg')
+    # manifest.append(f'webui/geolocation_config.json {get_hash(f"{HOME_DIR}/webui/geolocation.cfg")}')
 
     return manifest
 
