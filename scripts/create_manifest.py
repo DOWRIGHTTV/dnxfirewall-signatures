@@ -43,16 +43,12 @@ def build_manifest() -> list[str]:
             signature_list = sig_file.read().splitlines()
 
         for file in signature_list:
-            file_path = f'{folder}/{file}'
 
-            file_hash = get_hash(f'{HOME_DIR}/{file_path}')
+            file_path = f'configuration/{file}' if file.endswith('.cfg') else f'{folder}/{file}'
+
+            file_hash = get_hash(f'{HOME_DIR}/{folder}/{file}')
 
             manifest.append(f'{file_path} {file_hash}')
-
-    # webui geolocation config file
-    # webui_cfg_file_path = 'webui/geolocation_config.json'
-    # webui_cfg_hash = get_hash(f'{HOME_DIR}/webui/geolocation.cfg')
-    # manifest.append(f'webui/geolocation_config.json {get_hash(f"{HOME_DIR}/webui/geolocation.cfg")}')
 
     return manifest
 
