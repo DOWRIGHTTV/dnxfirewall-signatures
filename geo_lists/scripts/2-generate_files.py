@@ -8,7 +8,8 @@ from geolocation_enum_list import GEOLOCATION_ENUM_LIST
 
 PATH_SEPARATOR = '\\' if sys.platform == 'win32' else '/'
 HOME_DIR: str = '/'.join(os.path.realpath(__file__).split(PATH_SEPARATOR)[:-3])
-GEO_DIR: str = '/'.join(os.path.realpath(__file__).split(PATH_SEPARATOR)[:-2])
+CFG_DIR: str = f'{HOME_DIR}/configuration'
+GEO_DIR: str = f'{HOME_DIR}/geo_lists'
 
 # print(HOME_DIR)
 
@@ -84,7 +85,7 @@ def generate_geolocation_cfg():
     for continent_data in config['geolocation'].values():
         continent_data['countries'] = dict(sorted(continent_data['countries'].items()))
 
-    with open(f'{GEO_DIR}/geolocation.cfg', 'w') as f:
+    with open(f'{CFG_DIR}/geolocation.cfg', 'w') as f:
         json.dump(config, f, indent=4)
 
 
