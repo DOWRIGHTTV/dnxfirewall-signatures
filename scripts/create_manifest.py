@@ -8,8 +8,8 @@ import sys
 import hashlib
 
 WRITE_MANIFEST = True
-# WRITE_MANIFEST = False
 WRITE_VALIDATION = True
+# WRITE_MANIFEST = False
 # WRITE_VALIDATION = False
 
 PATH_SEPARATOR = '\\' if sys.platform == 'win32' else '/'
@@ -36,15 +36,17 @@ def get_hash(file_path: str) -> str:
 def build_manifest() -> list[str]:
     manifest = []
 
+    # signature files
     for folder in LIST_FOLDERS:
 
         with open(f'{HOME_DIR}/{folder}/SIGNATURE_LIST', 'r') as sig_file:
             signature_list = sig_file.read().splitlines()
 
         for file in signature_list:
-            file_path = f'{folder}/{file}'
 
-            file_hash = get_hash(f'{HOME_DIR}/{file_path}')
+            file_path = f'configuration/{file}' if file.endswith('.cfg') else f'{folder}/{file}'
+
+            file_hash = get_hash(f'{HOME_DIR}/{folder}/{file}')
 
             manifest.append(f'{file_path} {file_hash}')
 
